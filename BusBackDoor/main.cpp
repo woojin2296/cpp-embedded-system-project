@@ -9,7 +9,6 @@
 
 SoftwareSerial mySerial(6, 7);
 
-// ÇÉ ¹øÈ£ ¼³Á¤
 const int pinServo = 3;
 const int pinTrig = 2;
 const int pinEcho = 4;
@@ -20,22 +19,22 @@ const int D6 = 12; const int D7 = 13;
 
 LiquidCrystal lcd(RS, EN, D4, D5, D6, D7);
 
-// ¼­º¸¸ðÅÍ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 Servo servo;
 
-// ÃÊÀ½ÆÄ
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 int rangeMax = 200;
 int rangeMin = 0;
 
 long L;
 
 boolean dooropen = false;
-boolean openclose = false; // ¹®ÀÌ ¿­·È´Ù ´ÝÈû?
+boolean openclose = false; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½È´ï¿½ ï¿½ï¿½ï¿½ï¿½?
 boolean isClosed = false;
 
 unsigned long l1, l2;
 
-// Àå¾ÖÀÎÇ¥½Ã
+// ï¿½ï¿½ï¿½ï¿½ï¿½Ç¥ï¿½ï¿½
 byte creat1[] = {
   B00000,
   B00000,
@@ -68,7 +67,7 @@ void setup() {
     pinMode(pinTrig, OUTPUT);
     pinMode(pinEcho, INPUT);
 
-    // ¼­º¸¸ðÅÍ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     servo.attach(pinServo);
     servo.write(180);
 
@@ -85,7 +84,7 @@ String strClose = "close";
 byte c = "1";
 
 void loop() {
-    // ÃÊÀ½ÆÄ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     digitalWrite(pinTrig, LOW); delayMicroseconds(2);
     digitalWrite(pinTrig, HIGH); delayMicroseconds(10);
     digitalWrite(pinTrig, LOW);
@@ -93,12 +92,12 @@ void loop() {
     L = pulseIn(pinEcho, HIGH) / 58.82;
     Serial.println(L);
 
-    // ÃÊÀ½ÆÄºÎÅÍ ¶¥¹Ù´Ú±îÁö ¾à 18cm
-    // ÃÊÀ½ÆÄºÎÅÍ ¹®¹Ù´Ú(³¡)±îÁö ¾à 12cm
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù´Ú±ï¿½ï¿½ï¿½ ï¿½ï¿½ 18cm
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù´ï¿½(ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 12cm
 
-    // UARTÅë½Å(¸¶½ºÅÍ-¹öÆ°)  ¸¶½ºÅÍÂÊ ¹öÆ°À» ´©¸£¸é µÞ¹® ¿­¸²
+    // UARTï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½Æ°)  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¹ï¿½ ï¿½ï¿½ï¿½ï¿½
     if (mySerial.available()) {
-        // Serial.readStringUntil('\n') \n¹®ÀÚ¸¦ ¸¸³¯¶§ ±îÁö ¹®ÀÚ¿­ ÀÐ±â
+        // Serial.readStringUntil('\n') \nï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ ï¿½Ð±ï¿½
         String inString = mySerial.readStringUntil('\n');
         boolean open = inString.equals(strOpen);
         boolean close = inString.equals(strClose);
@@ -124,15 +123,15 @@ void loop() {
         }
     }
 
-    // Åë½Å(¸¶½ºÅÍ-¹öÆ°) ÃÊÀ½ÆÄ·Î ÀÎÇØ ¹®ÀÌ ¿­¸°°ÍÀ» °¨ÁöÇØ ¸¶½ºÅÍ¿¡ ¹®ÀÌ ¿­·È´Ù°í ¾Ë¸²
+    // ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½Æ°) ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½È´Ù°ï¿½ ï¿½Ë¸ï¿½
     if (isClosed && openclose && L <= 8) {
         servo.write(0);
         dooropen = true;
         openclose = false;
-        Serial.println("S - ¹®³¢ÀÓ, open");
+        Serial.println("S - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, open");
         lcd.setCursor(0, 1); lcd.print("                ");
         lcd.setCursor(1, 1); lcd.print("CHECK BACKDOOR");
-        mySerial.write('1'); // ¹®³¢ÀÓ ¹ß»ýÇÏ¿© ¸¶½ºÅÍÂÊ close¸¦ openÀ¸·Î ¹Ù²Þ
+        mySerial.write('1'); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ closeï¿½ï¿½ openï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½
     }
 
     l2 = millis();
@@ -142,7 +141,7 @@ void loop() {
 
 }
 
-// I2CÅë½Å (¸¶½ºÅÍ-Á¶ÀÌ½ºÆ½) ¹ö½º ¿¹¾àÈÄ ¹ö½º ³»ºÎ LCD¿¡ ¿¹¾à Ãâ·Â
+// I2Cï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½Ì½ï¿½Æ½) ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ LCDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 void receiveEvent(int howMany) {
     char c = Wire.read();
 
